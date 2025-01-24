@@ -15,7 +15,7 @@ jobs:
     - name: Run Trivy vulnerability scanner in fs mode
       uses: aquasecurity/trivy-action@0.29.0
       with:
-        scan-type: 'fs, repo'
+        scan-type: 'repo'
         scan-ref: '.'
         format: json
         exit-code: 1
