@@ -1,0 +1,32 @@
+# .github/workflows/package-check.yml
+name: Check for Affected Packages
+
+#on:
+#  workflow_dispatch:
+#  schedule:
+#    - cron: '0 2 * * *'  # Daily at 2 AM UTC
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'README.md'
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run package scan
+        run: node scan-packages.js
